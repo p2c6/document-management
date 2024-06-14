@@ -14,18 +14,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class EmailAuthService 
 {
      /**
-     * @var $loggerService
+     * @var $service
      */
-    private $loggerService;
+    private $service;
 
-     /**
-     * @var $responseService
-     */
-    private $responseService;
-
-    public function __construct(LoggerService $loggerService, ResponseService $responseService) {
-        $this->loggerService = $loggerService;
-        $this->responseService = $responseService;
+    public function __construct(ResponseService $service) {
+        $this->service = $service;
     }
 
     /**
@@ -42,9 +36,10 @@ class EmailAuthService
                 'role_id' => $request->role_id,
             ]);
 
-            return response()->json(["status" => "success", "message" => "Account registered!", "data" => $user], JsonResponse::HTTP_CREATED);
+            return $this->service->response('success', 'Account registered!', $user, JsonResponse::HTTP_CREATED);
+
         } catch (\Throwable $error) {
-            return $this->loggerService->log($error);
+            return $this->service->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -57,20 +52,17 @@ class EmailAuthService
             ]);
     
             if (!Auth::attempt($credentials)) {
-                return response()->json(["status" => "error", "data" => $credentials], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                return $this->service->response('error', 'Invalid Credentials', null, JsonResponse::HTTP_UNAUTHORIZED);
             }
     
             $request->session()->regenerate();
     
             $user = Auth::user();
     
-            return response()->json(["status" => "success", "data" => $user], JsonResponse::HTTP_OK);
+            return $this->service->response('success', null, $user, JsonResponse::HTTP_OK);
+
         } catch(\Throwable $error) {
-            return $this->loggerService->log($error);
-            return response()->json(["status" => "success", "data" => $user], JsonResponse::HTTP_OK);
+            return $this->service->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
-        
-
-
     }
 }
