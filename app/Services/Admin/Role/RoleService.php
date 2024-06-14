@@ -14,18 +14,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class RoleService 
 {
     /**
-     * @var $loggerService
+     * @var $service
      */
-    private $loggerService;
+    private $service;
 
-    /**
-     * @var $responseService
-     */
-    private $responseService;
-
-    public function __construct(LoggerService $loggerService, ResponseService $responseService) {
-        $this->loggerService = $loggerService;
-        $this->responseService = $responseService;
+    public function __construct(ResponseService $service) {
+        $this->service = $service;
     }
     /**
      * @param $request
@@ -38,9 +32,9 @@ class RoleService
                 'name' => $request->name,
             ]);
             
-            return $this->responseService->response('success', 'Role Created', $role, JsonResponse::HTTP_CREATED);
+            return $this->service->response('success', 'Role Created', $role, JsonResponse::HTTP_CREATED);
         } catch (\Throwable $error) {
-            return $this->responseService->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->service->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
