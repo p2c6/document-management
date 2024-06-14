@@ -20,7 +20,7 @@ class ResponseService
      * 
      * @return object 
      */
-    public function response($status, $message, $data = null, $response) : object
+    public function response($status, $message = null, $data = null, $response) : object
     {
         if ($status === "error")  {
             $service = new LoggerService();
