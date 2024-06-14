@@ -32,6 +32,7 @@ Route::prefix('v1/')->name('api.v1.')->group(function() {
     Route::prefix('auth')->name('auth.')->group(function() {
         Route::controller(AuthController::class)->group(function() {
             Route::post('signup', 'signup')->name('signup');
+            Route::post('signin', 'signin')->name('signin');
         });
     });
 
