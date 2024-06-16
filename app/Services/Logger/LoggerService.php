@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 class LoggerService 
 {
     /**
-     * @param $error
+     * @param \Throwable $error
      * @return void
      */
     public function logError($error)
