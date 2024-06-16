@@ -23,8 +23,12 @@ class ResponseService
     public function response($status, $message = null, $data = null, $response) : object
     {
         if ($status === "error")  {
-            $service = new LoggerService();
-            $service->logError($data);
+
+            if (!is_null($data)) {
+                $service = new LoggerService();
+                $service->logError($data);
+            }
+
             return response()->json(["status" => $status, "message" => $message, ], $response);
         }
 
