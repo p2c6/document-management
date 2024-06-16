@@ -25,6 +25,7 @@ Route::prefix('v1/')->name('api.v1.')->group(function() {
         });
     });
     
+    //CSRF
     Route::get('/csrf-token', function () {
         return response()->json(['csrf_token' => csrf_token()]);
     })->middleware('web');
