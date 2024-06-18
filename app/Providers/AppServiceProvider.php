@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Documents;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use League\CommonMark\Node\Block\Document;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('create-role', function (User $user) {
+            return $user->role_id == 1;
+        });
     }
 }

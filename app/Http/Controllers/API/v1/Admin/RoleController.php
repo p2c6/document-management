@@ -14,9 +14,11 @@ class RoleController extends Controller
     {
         $this->service = $service;
     }
-    
+
     public function store(Request $request)
     {
+        $this->authorize('create-role');
+        
         return $this->service->store($request);
     }
 }
