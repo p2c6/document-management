@@ -14,6 +14,7 @@ class RoleController extends Controller
     {
         $this->service = $service;
     }
+    
     public function store(Request $request)
     {
         return $this->service->store($request);
