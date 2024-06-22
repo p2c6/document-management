@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 class ApplicationController extends Controller
 {
     /**
+     * The application service instance.
+     * 
      * @var $service ApplicationService
      */
     private $service;
 
     public function __construct()
     {
-        
+
     }
 
     public function store(Request $request)
