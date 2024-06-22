@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('remarks')->nullable();
             $table->timestamps();
-            $table->foreignId('document_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('application_id')->constrained();
         });
     }
 
