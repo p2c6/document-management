@@ -2,66 +2,48 @@
 
 namespace App\Services\Application;
 
-
-use App\Models\User;
-use App\Services\Logger\LoggerService;
+use App\Models\Application;
 use App\Services\Response\ResponseService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApplicationService 
 {
-     /**
-     * @var $service
-     */
+    /**
+    *The response service instance. 
+    * 
+    * @var ResponseService
+    */
     private $service;
 
+    /**
+     * ApplicationService constructor.
+     *
+     * @param ResponseService $service The response service instance.
+     */
     public function __construct(ResponseService $service) {
         $this->service = $service;
     }
 
     /**
-     * @param $request
-     * @return object 
+     * Store a new application.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing application data.
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function signup($request) : object
+    public function store($request) : JsonResponse
     {
         try {
-            $user = User::create([
-                'email' => $request->email,
-                'password' => $request->password,
-                'full_name' => $request->full_name,
-                'role_id' => $request->role_id,
+            $application = Application::create([
+                'date_needed' => $request->date_needed,
+                'remarks' => $request->remarks,
+                'user_id' => Auth::user()->id,
+                'status' => Application::SUBMITTED,
             ]);
 
-            return $this->service->response('success', 'Account registered!', $user, JsonResponse::HTTP_CREATED);
+            return $this->service->response('success', 'Application Submitted!', $application, JsonResponse::HTTP_CREATED);
 
         } catch (\Throwable $error) {
-            return $this->service->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public function signin($request) : object
-    {
-        try {
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required'],
-            ]);
-    
-            if (!Auth::attempt($credentials)) {
-                return $this->service->response('error', 'Invalid Credentials', null, JsonResponse::HTTP_UNAUTHORIZED);
-            }
-    
-            $request->session()->regenerate();
-    
-            $user = Auth::user();
-    
-            return $this->service->response('success', null, $user, JsonResponse::HTTP_OK);
-
-        } catch(\Throwable $error) {
             return $this->service->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
