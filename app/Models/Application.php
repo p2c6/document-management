@@ -12,6 +12,15 @@ class Application extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'date_needed',
+        'remarks',
+        'user_id',
+        'status'
+    ];
+
+    const SUBMITTED = 'Submitted';
+
     /**
      * Get all the documents for the application.
      * 
