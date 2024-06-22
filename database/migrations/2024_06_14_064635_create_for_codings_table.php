@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->string('remarks')->nullable();
-            $table->timestamps();
             $table->foreignId('application_id')->constrained();
+            $table->timestamps();
         });
     }
 

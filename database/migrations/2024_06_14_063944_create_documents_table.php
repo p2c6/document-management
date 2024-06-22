@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('file_name');
             $table->date('date_issued');
             $table->date('expiration_date');
-            $table->timestamps();
             $table->foreignId('application_id')->constrained();
+            $table->timestamps();
 
         });
     }

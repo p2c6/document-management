@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('date_needed');
             $table->string('remarks');
             $table->string('status');
             $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 
