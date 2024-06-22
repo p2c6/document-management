@@ -2,13 +2,8 @@
 
 namespace App\Services\Admin\Role;
 
-use App\Models\Roles;
-use App\Models\User;
-use App\Services\Logger\LoggerService;
+use App\Models\Role;
 use App\Services\Response\ResponseService;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RoleService 
@@ -28,7 +23,7 @@ class RoleService
     public function store($request) : object
     {
         try {
-            $role = Roles::create([
+            $role = Role::create([
                 'name' => $request->name,
             ]);
             
