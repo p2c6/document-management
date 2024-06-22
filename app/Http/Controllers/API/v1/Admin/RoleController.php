@@ -17,7 +17,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create-role');
+        // $this->authorize('create-role');
         
         return $this->service->store($request);
     }

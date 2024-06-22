@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\v1\Admin\RoleController;
 use App\Http\Controllers\API\v1\Authentication\AuthController;
+use App\Http\Controllers\API\v1\Documents\ApplicationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,13 @@ Route::middleware(['web'])->prefix('v1/')->name('api.v1.')->group(function() {
         Route::controller(AuthController::class)->group(function() {
             Route::post('signup', 'signup')->name('signup');
             Route::post('signin', 'signin')->name('signin');
+        });
+    });
+
+    //APPLICATION
+    Route::prefix('application')->name('application.')->group(function() {
+        Route::controller(ApplicationController::class)->group(function() {
+            Route::post('store', 'store')->name('store');
         });
     });
     
