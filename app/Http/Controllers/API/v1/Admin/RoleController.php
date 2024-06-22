@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\Admin\Role\RoleService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RoleController extends Controller
 {
@@ -31,7 +32,7 @@ class RoleController extends Controller
      * @param \Illuminate\Http\Request $request The HTTP request object containing role data.
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         // $this->authorize('create-role');
         
