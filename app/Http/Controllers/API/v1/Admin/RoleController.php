@@ -29,6 +29,7 @@ class RoleController extends Controller
      * Store a new role.
      * 
      * @param \Illuminate\Http\Request $request The HTTP request object containing role data.
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function store(Request $request)
     {
