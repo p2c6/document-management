@@ -46,9 +46,9 @@ class ApplicationController extends Controller
      * 
      * @return \App\Http\Resources\ApplicationResource
      */
-    public function show(int $id)
+    public function show(int $id): ApplicationResource
     {
-        return new ApplicationResource(Application::findOrFail($id));
+        return $this->service->show($id);
     }
 
     /**

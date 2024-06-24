@@ -3,6 +3,7 @@
 namespace App\Services\Application;
 
 use App\Http\Resources\Application\ApplicationCollection;
+use App\Http\Resources\Application\ApplicationResource;
 use App\Models\Application;
 use App\Services\Response\ResponseService;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,18 @@ class ApplicationService
     public function index($paginatedModel): ApplicationCollection
     {
         return new ApplicationCollection($paginatedModel);
+    }
+
+    /**
+     * Show specific application.
+     * 
+     * @param int $id The id of the application.
+     * 
+     * @return \App\Http\Resources\ApplicationResource
+     */
+    public function show(int $id): ApplicationResource
+    {
+        return new ApplicationResource(Application::findOrFail($id));
     }
 
     /**
