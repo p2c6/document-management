@@ -29,6 +29,8 @@ Route::middleware(['web'])->prefix('v1/')->name('api.v1.')->group(function() {
     //APPLICATION
     Route::prefix('application')->name('application.')->group(function() {
         Route::controller(ApplicationController::class)->group(function() {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{id}', 'show')->name('show');
             Route::post('store', 'store')->name('store');
         });
     });
