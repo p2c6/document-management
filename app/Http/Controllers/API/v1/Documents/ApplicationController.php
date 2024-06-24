@@ -64,7 +64,7 @@ class ApplicationController extends Controller
 
     public function update(Application $application, Request $request)
     {
-
+        return $this->service->update($application, $request);
     }
 
     public function delete()

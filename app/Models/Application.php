@@ -20,6 +20,7 @@ class Application extends Model
     ];
 
     const SUBMITTED = 'Submitted';
+    const RESUBMITTED = 'Resubmitted';
 
     /**
      * Get all the documents for the application.
