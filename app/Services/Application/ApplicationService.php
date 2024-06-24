@@ -2,6 +2,7 @@
 
 namespace App\Services\Application;
 
+use App\Http\Resources\Application\ApplicationCollection;
 use App\Models\Application;
 use App\Services\Response\ResponseService;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,19 @@ class ApplicationService
      */
     public function __construct(ResponseService $service) {
         $this->service = $service;
+    }
+
+    /**
+     * The list of applications.
+     * 
+     * @param \App\Models\Application $paginatedModel The paginated application model.
+     * 
+     * @return \App\Http\Resources\Application\ApplicationCollection
+     * 
+     */
+    public function index($paginatedModel): ApplicationCollection
+    {
+        return new ApplicationCollection($paginatedModel);
     }
 
     /**
@@ -52,6 +66,7 @@ class ApplicationService
      * Update an application.
      *
      * @param \Illuminate\Http\Request $request The HTTP request object containing application data.
+     * @param \App\Models\Application $application The application model.
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function update($application, $request) : JsonResponse

@@ -32,11 +32,11 @@ class ApplicationController extends Controller
     /**
      * List of all applications.
      * 
-     * @return \App\Http\Resources\ApplicationResource
+     * @return \App\Http\Resources\ApplicationCollection
      */
-    public function index()
+    public function index(): ApplicationCollection
     {
-        return new ApplicationCollection(Application::paginate());
+        return $this->service->index(Application::paginate());
     }
 
     /**
