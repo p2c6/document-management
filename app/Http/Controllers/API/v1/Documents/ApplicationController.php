@@ -32,11 +32,11 @@ class ApplicationController extends Controller
     /**
      * List of all applications.
      * 
-     * @return \App\Http\Resources\ApplicationResource
+     * @return \App\Http\Resources\ApplicationCollection
      */
-    public function index()
+    public function index(): ApplicationCollection
     {
-        return new ApplicationCollection(Application::paginate());
+        return $this->service->index(Application::paginate());
     }
 
     /**
@@ -46,9 +46,9 @@ class ApplicationController extends Controller
      * 
      * @return \App\Http\Resources\ApplicationResource
      */
-    public function show(int $id)
+    public function show(int $id): ApplicationResource
     {
-        return new ApplicationResource(Application::findOrFail($id));
+        return $this->service->show($id);
     }
 
     /**
@@ -64,7 +64,7 @@ class ApplicationController extends Controller
 
     public function update(Application $application, Request $request)
     {
-
+        return $this->service->update($application, $request);
     }
 
     public function delete()
