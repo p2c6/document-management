@@ -13,6 +13,11 @@ class ApplicationTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    /**
+     * Test getting all application via API.
+     *
+     * This test verifies that an application can be fetched successfully via the API endpoint.
+     */
     public function test_get_all_application_via_api()
     {
         // Perform your API request
@@ -22,6 +27,11 @@ class ApplicationTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test posting new application via API.
+     *
+     * This test verifies that an application can be posted successfully via the API endpoint.
+     */
     public function test_post_application_via_api()
     {
         // Create a role (if not already created)
@@ -51,7 +61,11 @@ class ApplicationTest extends TestCase
         // Assert the response status
         $response->assertStatus(201);
     }
-
+    /**
+     * Test updating an application via API.
+     *
+     * This test verifies that an application can be updated successfully via the API endpoint.
+     */
     public function test_update_application_via_api()
     {
         // Create a role (if not already created)
