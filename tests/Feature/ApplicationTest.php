@@ -61,6 +61,7 @@ class ApplicationTest extends TestCase
         // Assert the response status
         $response->assertStatus(201);
     }
+    
     /**
      * Test updating an application via API.
      *
@@ -99,9 +100,6 @@ class ApplicationTest extends TestCase
             'status' => 'Resubmitted', // Updated status
             'user_id' => $user->id, // Ensure user_id remains unchanged
         ]);
-
-        // // Decode the JSON response content
-        // $responseData = json_decode($response->content(), true);
 
         $response->assertStatus(204);
 
