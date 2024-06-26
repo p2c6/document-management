@@ -21,7 +21,7 @@ class ApplicationService
     /**
      * ApplicationService constructor.
      *
-     * @param ResponseService $service The response service instance.
+     * @param ResponseService $service The instance of ResponseService.
      */
     public function __construct(ResponseService $service) {
         $this->service = $service;
@@ -56,6 +56,7 @@ class ApplicationService
      * Store a new application.
      *
      * @param \Illuminate\Http\Request $request The HTTP request object containing application data.
+     * 
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function store($request) : JsonResponse
@@ -80,6 +81,7 @@ class ApplicationService
      *
      * @param \Illuminate\Http\Request $request The HTTP request object containing application data.
      * @param \App\Models\Application $application The application model.
+     * 
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function update($application, $request) : JsonResponse

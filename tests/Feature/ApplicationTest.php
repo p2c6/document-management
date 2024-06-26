@@ -13,6 +13,11 @@ class ApplicationTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    /**
+     * Test getting all application via API.
+     *
+     * This test verifies that an application can be fetched successfully via the API endpoint.
+     */
     public function test_get_all_application_via_api()
     {
         // Perform your API request
@@ -22,6 +27,11 @@ class ApplicationTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test posting new application via API.
+     *
+     * This test verifies that an application can be posted successfully via the API endpoint.
+     */
     public function test_post_application_via_api()
     {
         // Create a role (if not already created)
@@ -51,7 +61,12 @@ class ApplicationTest extends TestCase
         // Assert the response status
         $response->assertStatus(201);
     }
-
+    
+    /**
+     * Test updating an application via API.
+     *
+     * This test verifies that an application can be updated successfully via the API endpoint.
+     */
     public function test_update_application_via_api()
     {
         // Create a role (if not already created)
@@ -82,18 +97,15 @@ class ApplicationTest extends TestCase
         ])->putJson('/api/v1/application/update/'.$application->id, [
             'date_needed' => '2024-06-15', // Updated date needed
             'remarks' => 'Updated remarks', // Updated remarks
-            'status' => 'Approved', // Updated status
+            'status' => 'Resubmitted', // Updated status
             'user_id' => $user->id, // Ensure user_id remains unchanged
         ]);
-
-        // // Decode the JSON response content
-        // $responseData = json_decode($response->content(), true);
 
         $response->assertStatus(204);
 
         // Optionally, assert specific changes in the updated application
         $this->assertNotEquals('2024-06-15', $application->fresh()->date_needed);
         $this->assertNotEquals('Updated remarks', $application->fresh()->remarks);
-        $this->assertNotEquals('Approved', $application->fresh()->status);
+        $this->assertNotEquals('Resubmitted', $application->fresh()->status);
     }
 }

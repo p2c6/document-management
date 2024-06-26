@@ -13,20 +13,30 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EmailAuthService 
 {
-     /**
-     * @var $service
+    /**
+     * The response service instasnce.
+     *
+     * @var ResponseService
      */
     private $service;
 
+    /**
+     * Email Auth Service constructor.
+     * 
+     * @param $service the instance of ResponseService.
+     */
     public function __construct(ResponseService $service) {
         $this->service = $service;
     }
 
     /**
-     * @param $request
-     * @return object 
+     * Handle user signup request.
+     * 
+     * @param \Illuminate\Http\Request $request The HTTP request object containing user data.
+     * 
+     * @return \Symfony\Component\HttpFoundation\JsonResponse 
      */
-    public function signup($request) : object
+    public function signup($request) : JsonResponse
     {
         try {
             $user = User::create([
@@ -43,7 +53,14 @@ class EmailAuthService
         }
     }
 
-    public function signin($request) : object
+    /**
+     * Handle user signin request.
+     * 
+     * @param \Illuminate\Http\Request $request The HTTP request object containing user data.
+     * 
+     * @return \Symfony\Component\HttpFoundation\JsonResponse 
+     */
+    public function signin($request) : JsonResponse
     {
         try {
             $credentials = $request->validate([
