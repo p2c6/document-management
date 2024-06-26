@@ -18,7 +18,7 @@ class AuthController extends Controller
     /**
      * Class constructor.
      *
-     * @param EmailAuthService $service The email authentication service instance.
+     * @param EmailAuthService $service The instance of EmailAuthService.
      */
     public function __construct(EmailAuthService $service)
     {

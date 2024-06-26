@@ -30,6 +30,8 @@ class EmailAuthService
     }
 
     /**
+     * Handle user signup request.
+     * 
      * @param \Illuminate\Http\Request $request The HTTP request object containing user data.
      * 
      * @return \Symfony\Component\HttpFoundation\JsonResponse 
@@ -52,6 +54,8 @@ class EmailAuthService
     }
 
     /**
+     * Handle user signin request.
+     * 
      * @param \Illuminate\Http\Request $request The HTTP request object containing user data.
      * 
      * @return \Symfony\Component\HttpFoundation\JsonResponse 
