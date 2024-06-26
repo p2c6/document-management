@@ -82,7 +82,7 @@ class ApplicationTest extends TestCase
         ])->putJson('/api/v1/application/update/'.$application->id, [
             'date_needed' => '2024-06-15', // Updated date needed
             'remarks' => 'Updated remarks', // Updated remarks
-            'status' => 'Approved', // Updated status
+            'status' => 'Resubmitted', // Updated status
             'user_id' => $user->id, // Ensure user_id remains unchanged
         ]);
 
@@ -94,6 +94,6 @@ class ApplicationTest extends TestCase
         // Optionally, assert specific changes in the updated application
         $this->assertNotEquals('2024-06-15', $application->fresh()->date_needed);
         $this->assertNotEquals('Updated remarks', $application->fresh()->remarks);
-        $this->assertNotEquals('Approved', $application->fresh()->status);
+        $this->assertNotEquals('Resubmitted', $application->fresh()->status);
     }
 }
