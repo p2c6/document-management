@@ -24,7 +24,7 @@ class AuthTest extends TestCase
             $response = $this->withHeaders([
                 'X-CSRF-TOKEN' => $csrfToken
             ])->postJson('/api/v1/auth/signup', [
-                    'email' => 'wewz@gmail.com',
+                    'email' => 'testing_one@gmail.com',
                     'full_name' => 'Johhny Doe',
                     'role_id' => $role->id,
                     'password' => 'password123',
@@ -58,6 +58,33 @@ class AuthTest extends TestCase
             ]);
     
             $response->assertStatus(200);
+
+    }
+
+    /**
+     * Test signing in in via API.
+     *
+     * This test verifies that a user can be signed in successfully via the API endpoint.
+     */
+    public function test_sign_out_via_api(): void
+    {
+            $csrfToken = csrf_token();
+
+            $role = Role::factory()->create(['name' => 'User']);
+            
+            $user = User::factory()->create([
+                'full_name' => 'John Doe',
+                'role_id' => $role->id,
+            ]);
+            
+            $this->actingAs($user);
+
+            $response = $this->withHeaders([
+                'X-CSRF-TOKEN' => $csrfToken
+            ])->postJson('/api/v1/auth/signout');
+
+    
+            $response->assertStatus(204);
 
     }
 }

@@ -47,4 +47,17 @@ class AuthController extends Controller
     {
         return $this->service->signin($request);
     }
+
+    /**
+     * *
+     * Handle user sign-out request.
+     * 
+     * @param \Illuminate\Http\Request $request The HTTP request object containing user data.
+     * 
+     * @return \Symfony\Component\HttpFoundation\JsonResponse 
+     */
+    public function signout(Request $request): JsonResponse
+    {
+        return $this->service->logout($request);
+    }
 }

@@ -82,4 +82,23 @@ class EmailAuthService
             return $this->service->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * *
+     * Handle user sign-out request.
+     * 
+     * @param \Illuminate\Http\Request $request The HTTP request object containing user data.
+     * 
+     * @return \Symfony\Component\HttpFoundation\JsonResponse 
+     */
+    public function logout($request): JsonResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return $this->service->response('success', null, null, JsonResponse::HTTP_NO_CONTENT);
+    }
 }
