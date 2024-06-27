@@ -4,12 +4,23 @@ namespace Tests\Feature;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Artisan::call('migrate:fresh --seed');
+    }
+    
     /**
      * Test signing up via API.
      *
