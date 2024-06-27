@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\v1\Admin\RoleController;
 use App\Http\Controllers\API\v1\Authentication\AuthController;
 use App\Http\Controllers\API\v1\Documents\ApplicationController;
+use App\Http\Controllers\TemporaryFileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,12 @@ Route::middleware(['web'])->prefix('v1/')->name('api.v1.')->group(function() {
             Route::post('store', 'store')->name('store');
             Route::put('/update/{id}', 'update')->name('update');
         });
+    });
+
+    //TEMPORARY FILE
+    Route::prefix('temporary-file/')->name('temporary-file.')->controller(TemporaryFileController::class)->group(function () {
+        Route::post('upload', 'upload')->name('upload');
+        Route::post('revert', 'revert')->name('revert');
     });
     
     //CSRF
