@@ -15,7 +15,7 @@ class AuthTest extends TestCase
      *
      * This test verifies that a user can be signed in successfully via the API endpoint.
      */
-    public function test_signed_in_via_api(): void
+    public function test_sign_in_via_api(): void
     {
             $csrfToken = csrf_token();
 
