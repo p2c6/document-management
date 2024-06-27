@@ -65,8 +65,6 @@ class TemporaryFileUploadTest extends TestCase
 
         $responseData = $response->json();
 
-         // Log the uploaded files
-
         foreach($responseData as $responseData) {
             $this->assertDatabaseHas('temporary_files', [
                 'folder' => $responseData, 
