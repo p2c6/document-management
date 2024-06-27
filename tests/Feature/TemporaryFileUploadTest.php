@@ -12,9 +12,9 @@ use Tests\TestCase;
 class TemporaryFileUploadTest extends TestCase
 {
     /**
-     * Test temporary file upload via API.
+     * Test temporary file single upload via API.
      * 
-     *  This test verifies that a user can be upload a temporary file successfully via the API endpoint.
+     *  This test verifies that a user can be upload a temporary single file successfully via the API endpoint.
      */
     public function test_temporary_file_single_upload_via_api(): void
     {
@@ -36,5 +36,41 @@ class TemporaryFileUploadTest extends TestCase
         $this->assertDatabaseHas('temporary_files', [
             'folder' => $response->content(), // Assuming you store hash name
         ]);
+    }
+
+    /**
+     * Test temporary file multiple upload via API.
+     * 
+     *  This test verifies that a user can be upload a temporary multiple file successfully via the API endpoint.
+     */
+    public function test_temporary_file_multiple_upload_via_api(): void
+    {
+        $csrfToken = csrf_token();
+
+        Storage::fake('public'); // Use a fake disk for testing
+
+        $fileOne = UploadedFile::fake()->create('testfile.txt'); // Create a fake uploaded file
+        $fileTwo = UploadedFile::fake()->create('testfile2.txt'); // Create a fake uploaded file
+
+        $response = $this->withHeaders([
+            'X-CSRF-TOKEN' => $csrfToken
+        ])->postJson('/api/v1/temporary-file/upload', [
+            'filepond' => [
+                $fileOne,
+                $fileTwo,
+            ]
+        ]);
+
+        $response->assertStatus(200); // Assuming 200 is the success status code
+
+        $responseData = $response->json();
+
+         // Log the uploaded files
+
+        foreach($responseData as $responseData) {
+            $this->assertDatabaseHas('temporary_files', [
+                'folder' => $responseData, 
+            ]);
+        }
     }
 }
