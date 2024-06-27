@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1\Authentication;
 use App\Http\Controllers\Controller;
 use App\Services\Authentication\EmailAuthService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AuthController extends Controller
 {
@@ -29,9 +30,9 @@ class AuthController extends Controller
      * Handle user signup request.
      *
      * @param \Illuminate\Http\Request $request The HTTP request object containing signup data.
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\JsonResponse 
      */
-    public function signup(Request $request)
+    public function signup(Request $request): JsonResponse
     {
         return $this->service->signup($request);
     }
@@ -42,7 +43,7 @@ class AuthController extends Controller
      * @param \Illuminate\Http\Request $request The HTTP request object containing sign-in data.
      * @return \Illuminate\Http\Response
      */
-    public function signin(Request $request)
+    public function signin(Request $request): JsonResponse
     {
         return $this->service->signin($request);
     }
