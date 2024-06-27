@@ -31,6 +31,7 @@ class TemporaryFileUploadTest extends TestCase
         ]);
 
         $response->assertStatus(200); // Assuming 200 is the success status code
+        $this->assertNotEquals('', $response->content());
 
         // Optionally assert the created temporary files in the database
         $this->assertDatabaseHas('temporary_files', [
@@ -70,5 +71,7 @@ class TemporaryFileUploadTest extends TestCase
                 'folder' => $responseData, 
             ]);
         }
+        
+        $this->assertNotEquals('', $response->content());
     }
 }
