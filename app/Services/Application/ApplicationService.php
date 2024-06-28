@@ -45,7 +45,7 @@ class ApplicationService
      * 
      * @param int $id The id of the application.
      * 
-     * @return \App\Http\Resources\ApplicationResource
+     * @return \App\Http\Resources\Application\ApplicationResource
      */
     public function show(int $id): ApplicationResource
     {
