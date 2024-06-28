@@ -2,7 +2,7 @@
 
 namespace App\Services\Admin\Role;
 
-use App\Http\Resources\RoleCollection;
+use App\Http\Resources\Role\RoleCollection;
 use App\Models\Role;
 use App\Services\Response\ResponseService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,9 +37,9 @@ class RoleService
     /**
      * The list of roles.
      * 
-     * @param \App\Models\Application $paginatedModel The paginated role model.
+     * @param \App\Models\Role $paginatedModel The paginated role model.
      * 
-     * @return \App\Http\Resources\Application\RoleCollection
+     * @return \App\Http\Resources\Role\RoleCollection
      * 
      */
     public function index($paginatedModel): RoleCollection

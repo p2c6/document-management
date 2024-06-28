@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\v1\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RoleCollection;
+use App\Http\Resources\Role\RoleCollection;
 use App\Models\Role;
 use App\Services\Admin\Role\RoleService;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class RoleController extends Controller
     /**
      * List of all roles.
      * 
-     * @return \App\Http\Resources\RoleCollection
+     * @return \App\Http\Resources\Role\RoleCollection
      */
     public function index(): RoleCollection
     {
