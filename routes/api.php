@@ -16,6 +16,7 @@ Route::middleware(['web'])->prefix('v1/')->name('api.v1.')->group(function() {
     Route::prefix('roles')->name('roles.')->group(function() {
         Route::controller(RoleController::class)->group(function() {
             Route::post('store', 'store');
+            Route::get('index', 'index');
         });
     });
 
