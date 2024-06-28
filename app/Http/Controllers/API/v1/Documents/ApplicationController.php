@@ -32,7 +32,7 @@ class ApplicationController extends Controller
     /**
      * List of all applications.
      * 
-     * @return \App\Http\Resources\ApplicationCollection
+     * @return \App\Http\Resources\Application\ApplicationCollection
      */
     public function index(): ApplicationCollection
     {
@@ -44,7 +44,7 @@ class ApplicationController extends Controller
      * 
      * @param int $id The id of the application.
      * 
-     * @return \App\Http\Resources\ApplicationResource
+     * @return \App\Http\Resources\Application\ApplicationResource
      */
     public function show(int $id): ApplicationResource
     {
