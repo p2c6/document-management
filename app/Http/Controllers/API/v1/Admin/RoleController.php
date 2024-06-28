@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\v1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoleCollection;
+use App\Models\Role;
 use App\Services\Admin\Role\RoleService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,6 +26,16 @@ class RoleController extends Controller
     public function __construct(RoleService $service)
     {
         $this->service = $service;
+    }
+
+    /**
+     * List of all roles.
+     * 
+     * @return \App\Http\Resources\RoleCollection
+     */
+    public function index(): RoleCollection
+    {
+        return $this->service->index(Role::paginate());
     }
 
     /**
