@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\TestController;
-use App\Jobs\SendEmailJob;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\AccountCreated;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    SendEmailJob::dispatch();
     return view('welcome');
 });
 
 Route::get('/test', [TestController::class]);
+Route::get('/send-email', [TestController::class, 'sendEmail']);
