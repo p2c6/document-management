@@ -12,7 +12,7 @@ use Tests\TestCase;
 class AccountCreatedMailTest extends TestCase
 {
     /**
-     * Test content is indicated upon user mailing.
+     * Test if the email and full name content is correctly indicated when a user creates an account.
      */
     public function test_mailable_content_upon_account_creation(): void
     {
