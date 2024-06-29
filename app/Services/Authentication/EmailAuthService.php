@@ -2,7 +2,7 @@
 
 namespace App\Services\Authentication;
 
-
+use App\Jobs\SendEmailJob;
 use App\Models\User;
 use App\Services\Logger\LoggerService;
 use App\Services\Response\ResponseService;
@@ -45,6 +45,8 @@ class EmailAuthService
                 'full_name' => $request->full_name,
                 'role_id' => $request->role_id,
             ]);
+
+            if ($user) SendEmailJob::dispatch($user);
 
             return $this->service->response('success', 'Account registered!', $user, JsonResponse::HTTP_CREATED);
 

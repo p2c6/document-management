@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\TestController;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\AccountCreated;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,3 +12,4 @@ Route::get('/', function () {
 });
 
 Route::get('/test', [TestController::class]);
+Route::get('/send-email', [TestController::class, 'sendEmail']);

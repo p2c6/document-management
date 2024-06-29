@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AccountCreated;
 use App\Models\Application;
+use Illuminate\Support\Facades\Mail;
 
 class TestController extends Controller
 {
@@ -24,5 +26,18 @@ class TestController extends Controller
                         ->willReturn($paginatedData);
 
        info($mockApplication);
+    }
+
+    public function sendEmail()
+    {
+        $data = ['message' => 'test'];
+        $email = 'jdoe1@gmail.com';
+    //     Mail::send('mail.authentication.signup', $data,  function($message) use ($email) {
+    //         $message->from('ggsir@gmail.com','Test'); 
+    //         $message->to($email)->subject('Account Created');
+    //    });
+
+        Mail::to($email)->send(new AccountCreated());
+        return 'Email sent...';
     }
 }
