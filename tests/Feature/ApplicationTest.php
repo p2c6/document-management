@@ -135,11 +135,18 @@ class ApplicationTest extends TestCase
             'user_id' => $user->id, // Ensure user_id remains unchanged
         ]);
 
-        $response->assertStatus(204);
+        $data = json_decode($response->content(), true);
+
+        $response->assertStatus(200);
 
         // Optionally, assert specific changes in the updated application
         $this->assertNotEquals('2024-06-15', $application->fresh()->date_needed);
         $this->assertNotEquals('Updated remarks', $application->fresh()->remarks);
         $this->assertNotEquals('Resubmitted', $application->fresh()->status);
+
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Application Resubmitted!',
+        ]);
     }
 }
