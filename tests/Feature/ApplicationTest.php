@@ -49,7 +49,7 @@ class ApplicationTest extends TestCase
         $response = $this->getJson('/api/v1/application');        
 
         // Assert the response
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertJson([
             'data' => $response['data']
         ]);
@@ -88,7 +88,7 @@ class ApplicationTest extends TestCase
         $data = json_decode($response->content(), true);
 
         // Assert the response status
-        $response->assertStatus(201);
+        $response->assertCreated();
         $response->assertJson([
             'status' => 'success',
             'message' => 'Application Submitted!',
@@ -137,7 +137,7 @@ class ApplicationTest extends TestCase
 
         $data = json_decode($response->content(), true);
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         // Optionally, assert specific changes in the updated application
         $this->assertNotEquals('2024-06-15', $application->fresh()->date_needed);
