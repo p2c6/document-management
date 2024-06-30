@@ -19,6 +19,6 @@ class RoleTest extends TestCase
         $response = $this->postJson('/api/v1/roles/store', ['name' => 'User']);
 
         // Assert that the response status is HTTP 201 Created
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 }
