@@ -41,7 +41,7 @@ class AuthTest extends TestCase
                     'password' => 'password123',
             ]);
 
-            $response->assertStatus(201);
+            $response->assertCreated();
 
     }
 
@@ -68,7 +68,7 @@ class AuthTest extends TestCase
                 'password' => 'password123',
             ]);
     
-            $response->assertStatus(200);
+            $response->assertOk();
 
     }
 
@@ -95,7 +95,7 @@ class AuthTest extends TestCase
             ])->postJson('/api/v1/auth/signout');
 
     
-            $response->assertStatus(204);
+            $response->assertNoContent();
 
     }
 }
