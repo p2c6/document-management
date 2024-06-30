@@ -94,7 +94,7 @@ class ApplicationService
                 'status' => Application::RESUBMITTED,
             ]);
 
-            return $this->service->response('success', 'Application Resubmitted!',null, JsonResponse::HTTP_NO_CONTENT);
+            return $this->service->response('success', 'Application Resubmitted!',null, JsonResponse::HTTP_OK);
 
         } catch (\Throwable $error) {
             return $this->service->response('error', 'Server Error', $error, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
