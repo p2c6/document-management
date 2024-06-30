@@ -135,8 +135,6 @@ class ApplicationTest extends TestCase
             'user_id' => $user->id, // Ensure user_id remains unchanged
         ]);
 
-        $data = json_decode($response->content(), true);
-
         $response->assertOk();
 
         // Optionally, assert specific changes in the updated application
