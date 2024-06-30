@@ -21,11 +21,38 @@ class ApplicationTest extends TestCase
      */
     public function test_get_all_application_via_api()
     {
+        // Create a role (if not already created)
+        $role = Role::factory()->create(['name' => 'User']);
+
+        // Create a user using the modified factory
+        $user = User::factory()->create([
+            'full_name' => 'John Doe', // Optional: Provide specific full name
+            'role_id' => $role->id,
+        ]);
+
+        $this->actingAs($user);
+
+        // Retrieve CSRF token
+        $csrfToken = csrf_token();
+
         // Perform your API request
-        $response = $this->getJson('/api/v1/application');
+        $response = $this->withHeaders([
+            'X-CSRF-TOKEN' => $csrfToken
+        ])->postJson('/api/v1/application/store', [
+            'date_needed' => '2024-05-06',
+            'remarks' => 'Test',
+            'status' => 'Submitted',
+            'user_id' => $user->id
+        ]);
+
+        // Perform your API request
+        $response = $this->getJson('/api/v1/application');        
 
         // Assert the response
         $response->assertStatus(200);
+        $response->assertJson([
+            'data' => $response['data']
+        ]);
     }
 
     /**
@@ -59,7 +86,7 @@ class ApplicationTest extends TestCase
             'user_id' => $user->id
         ]);
         $data = json_decode($response->content(), true);
-        
+
         // Assert the response status
         $response->assertStatus(201);
         $response->assertJson([
