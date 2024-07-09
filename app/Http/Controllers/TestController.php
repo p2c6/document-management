@@ -5,27 +5,42 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Mail\AccountCreated;
 use App\Models\Application;
+use App\Models\User;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+
 use Illuminate\Support\Facades\Mail;
+use P2c6\LaravelSystemGeneratedCode\Helpers\SystemGeneratedCodeHelper;
 
 class TestController extends Controller
 {
+    public function generateCode()
+    {
+        $generatedCode = SystemGeneratedCodeHelper::generateCode(123);
+        return $generatedCode;
+    }
+    
     public function test()
     {
-        // Mocking paginated data (you may adjust this depending on your actual data structure)
-        $paginatedData = [
-            ['id' => 1, 'name' => 'Application 1'],
-            ['id' => 2, 'name' => 'Application 2'],
-            // Add more data as needed
-        ];
+        $user = User::all();
+     
+        // Collection::macro('toUpper', function () {
+        //     return $this->map(function (string $value) {
+        //         return Str::upper($value);
+        //     });
+        // });
         
-        // Mocking the Application::paginate() method to return $paginatedData
-        $mockApplication = $this->getMockBuilder(Application::class)
-                                ->getMock();
-        
-        $mockApplication->method('paginate')
-                        ->willReturn($paginatedData);
+        // $average = collect($user)->sum('id');;
 
-       info($mockApplication);
+        // return $average;
+
+        $test = collect($user)
+        ->filter(fn($user) => $user->active)
+        ->map(fn($user) => $user->name)
+        ->sort()
+        ->all();
+
+        return $test;
     }
 
     public function sendEmail()
