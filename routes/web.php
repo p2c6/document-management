@@ -11,5 +11,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', [TestController::class]);
+Route::get('/test', [TestController::class, 'test']);
 Route::get('/send-email', [TestController::class, 'sendEmail']);
