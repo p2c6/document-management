@@ -13,3 +13,4 @@ Route::get('/', function () {
 
 Route::get('/test', [TestController::class, 'test']);
 Route::get('/send-email', [TestController::class, 'sendEmail']);
+Route::get('/generate', [TestController::class, 'generateCode']);

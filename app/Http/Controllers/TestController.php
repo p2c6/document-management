@@ -10,9 +10,16 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Mail;
+use P2c6\LaravelSystemGeneratedCode\Helpers\SystemGeneratedCodeHelper;
 
 class TestController extends Controller
 {
+    public function generateCode()
+    {
+        $generatedCode = SystemGeneratedCodeHelper::generateCode(123);
+        return $generatedCode;
+    }
+    
     public function test()
     {
         $user = User::all();
