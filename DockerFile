@@ -1,4 +1,4 @@
-# Use the official PHP image with FPM
+# Use the official PHP image with FPMM
 FROM php:8.0-fpm
 
 # Install system dependencies
