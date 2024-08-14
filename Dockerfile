@@ -1,41 +1,36 @@
-# Use the official PHP image with FPM
-FROM php:8.0-fpm
+# Use the official PHP image with Apache
+FROM php:8.1-apache
 
-# Install system dependencies
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libicu-dev \
     libzip-dev \
     unzip \
     git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
-    && docker-php-ext-install zip
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+    && docker-php-ext-install intl pdo pdo_mysql zip
 
 # Set the working directory
 WORKDIR /var/www/html
 
-# Copy the application code to the container
-COPY . .
+# Copy application files
+COPY . /var/www/html
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Generate application key and run migrations
-RUN php artisan key:generate && php artisan migrate --force
-
-# Install Node.js and npm
-RUN apt-get install -y nodejs npm
-
-# Install Node.js dependencies and build assets
-RUN npm install && npm run production
+# Copy Apache configuration file
+COPY ./apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Expose port 80
 EXPOSE 80
 
-# Start PHP-FPM server
-CMD ["php-fpm"]
+# Start Apache server
+CMD ["apache2-foreground"]
